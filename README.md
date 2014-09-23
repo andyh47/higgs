@@ -5,12 +5,12 @@ The Higgs Boson Challenge just wrapped up on Kaggle.com where I placed 98 out of
 For the Challenge I used Python, iPython Notebook, Sci-kit Learn, MongoDB and 8-core and 32-core AWS EC2 Ubuntu servers (and my trusty 2008 MacBook Pro).   The preferred classification algorithm for many in the Challenge was xgboost, a-multi threaded gradient boosting algorithm that worked very well on this data set.  While I tried other algorithms such as Random Forest, xgboost worked best for me. The first step in the flow is to find the best parameters for xgboost using the Python's HyperOpt module.  Once a promising parameter set is found, that model is bagged 100 times to reduce model variance and the prediction results are stored in MongoDB documents.  The last step is to select several models from the database and combine then with a simple averaging stacker. Run times for a 5 model stack are about 4 hours on an 8-core machine.
 
 The code for this flow is organized as follows:
-—  data set 2split:  split the training dataset int train and validation sets, split out weights etc.
-—  xgboost with HyperOpt:  Search for best xgboost parameters
-— xgboost with Bagging:   Bag a good model 100 times and save results for stacking
-— AVGstacker:   Simple averaging stacker
-— hyperopt_lib:  functions from plotting hyper results
-— higgs_lib:  functions for computing AMS, signal and noise true post ivies and negatives, etc.
+- data set 2split:  split the training dataset int train and validation sets, split out weights etc.
+- xgboost with HyperOpt:  Search for best xgboost parameters
+- xgboost with Bagging:   Bag a good model 100 times and save results for stacking
+- AVGstacker:   Simple averaging stacker
+- hyperopt_lib:  functions from plotting hyper results
+- higgs_lib:  functions for computing AMS, signal and noise true post ivies and negatives, etc.
 
 **Feature Engineering**
 
