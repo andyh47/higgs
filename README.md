@@ -12,13 +12,13 @@ The code for this flow is organized as follows:
 — hyperopt_lib:  functions from plotting hyper results
 — higgs_lib:  functions for computing AMS, signal and noise true post ivies and negatives, etc.
 
-Feature Engineering
+**Feature Engineering**
 
 I explored a variety of feature engineering options, mostly without success.  Combining or eliminating variables based on PCA or Random Forest Importance measures resulted in worse results both on my locally calculated metric and on the Public Leaderboard.  This data set was carefully constructed by physicists at CERN, which may explain this result.  If you're trying to advance the state of the art in high energy physics classification, which was the point of the Challenge, then seeding the data with useless parameters doesn't buy anything.  Since the signal and noise overlapped so heavily in some areas, I tried kernel PCA to transform the data set to a higher dimension hoping to separate signal from noise.  Unfortunately, this did not provide improvement but in the process, I found a recent paper (June 2014), describing an approximation to kernel PCA, called IdealPCA, that provides the results similar to kernel PCA but can run on large data sets using modest amounts of memory and time.  (See: Learning with Cross-Kernels and Ideal PCA, http://arxiv.org/abs/1406.2646).  The only available implementation at this time is Matlab/Octave which is what I used.  Should be a very useful algorithm.  In the end, there were only couple of feature changes that I applied: I log transformed a half dozen variables that had skewed distributions and added two dummy variables related to the presence or absence of so-called "jets" in the decay products.  
 
 The Challenge got an eleventh-hour surprise when a team of physicists released a set of new features hours before the end of the challenge.  These were based on computations on the original data set guided by high-energy physics knowledge and ~5000 hours of computer time.  This lead to a lot of scrambling at the end and a lot of changes in the Leaderboard. I made a submission using this additional data but, although it ranked higher on the Public Leaderboard, in the end it was not as good as my best previous set.
 
-Lessons Learned
+**Lessons Learned**
 
 The scoring metric for the Challenge is called Approximate Median Significance (AMS).  AMS was noted by many to be very unstable, depending highly on the exact set of data used to calculate it.  My approach to dealing with this was to bag heavily and stack to stabilize my results.  My predictions of AMS on the other hand used only a simple train and validation split.  This lead to local AMS scores which varied significantly from the Leaderboard scores.  This is a big disadvantage because with an unstable AMS you can't be sure that you're putting your best model forward.  My take-away is that it's worthwhile to spend as much time as necessary at the start in order to get a stable metric prediction.  For example, one Forum poster  used 4-fold cross validation, repeated 5 times to achieve stability and accuracy for AMS. Time-consuming but it improved accuracy and stability. 
 
