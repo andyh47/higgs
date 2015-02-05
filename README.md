@@ -10,7 +10,7 @@ The code for this flow is organized as follows (.py and .ipynb versions are avai
 - withBagging-xgboost:   Bag a good model 100 times and save results for stacking
 - stackerAVG:   Simple averaging stacker
 - hyper_lib:  functions from plotting hyper results
-- higgs_lib:  functions for computing AMS, signal and noise true post ivies and negatives, etc.
+- higgs_lib:  functions for computing AMS, signal and noise true postitives and negatives, etc.
 
 **Feature Engineering**
 
